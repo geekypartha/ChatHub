@@ -13,7 +13,7 @@ import io from 'socket.io-client';
 
 import { IoSendSharp } from "react-icons/io5";
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://chat-hub-uct8.onrender.com";    //--> to use locally "http://localhost:5000";
 var socket, selectedChatCompare;
 
 //import { sendMessage } from '../../../backend/controllers/messageControllers';
