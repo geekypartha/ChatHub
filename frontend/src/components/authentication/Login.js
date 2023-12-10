@@ -5,8 +5,9 @@ import { Link as ReactRouterLink } from 'react-router-dom'
 import { Link as ChakraLink, LinkProps } from '@chakra-ui/react'
 
 import { useToast } from '@chakra-ui/react';
-import axios from 'axios';
+import axios from "axios";
 import { useHistory } from 'react-router-dom';
+import { ChatState } from '../../Context/ChatProvider';
 
 const Login = () => {
   const [show, setShow] = useState(false)
@@ -17,13 +18,14 @@ const Login = () => {
   const history = useHistory();
 
   const handleClick = () => setShow(!show);
+  const {setUser} = ChatState();
 
   const submitHandler = async () =>{
     setLoading(true);
         if(!email ||!password){
             toast({
-                title:'Please Fill all the fields',
-                status: 'warning',
+                title:"Please Fill all the fields",
+                status: "warning",
                 duration: 5000,
                 isClosable: true,
                 position: "bottom",
@@ -35,11 +37,11 @@ const Login = () => {
         try{
             const config ={
                 headers:{
-                    'content-type': 'application/json',
+                    "content-type": "application/json",
                 },
             };
             const {data} = await axios.post(
-                '/api/user/login',{email,password},
+                "/api/user/login",{email,password},
                 config
             );
             toast({
@@ -49,9 +51,10 @@ const Login = () => {
                 isClosable: true,
                 position: "bottom",
             });
-            localStorage.setItem('userInfo', JSON.stringify(data));
+            setUser(data);
+            localStorage.setItem("userInfo", JSON.stringify(data));
             setLoading(false);
-            history.push('/chats')
+            history.push("/chats")
         }catch(error){
             toast({
                 title:'Error Occured!',

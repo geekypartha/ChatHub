@@ -12,10 +12,53 @@ const GroupChatModal = ({children}) => {
     const [search, setSearch] = useState("");
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [pic, setPic] = useState();
 
     const toast = useToast();
 
     const {user, chats, setChats } = ChatState();
+
+    const postDetails = (pics) => {
+        setLoading(true);
+        if(pics === undefined){
+            toast({
+                title: 'Please Select an Image!',
+                status:'warning',
+                duration: 5000,
+                isClosable: true,
+                position: 'bottom',
+            })
+            return;
+        }
+        if(pics.type==='image/jpeg' || pics.type === 'image/png'){
+            const data = new FormData();
+            data.append('file',pics);
+            data.append('upload_preset', "ChatHub");
+            data.append('cloud_name', 'geekypartha');
+            fetch('https://api.cloudinary.com/v1_1/geekypartha/image/upload',{
+                method:'post',
+                body: data,
+            }).then((res) => res.json())
+            .then(data=>{
+                setPic(data.url.toString());
+                console.log(data.url.toString());
+                setLoading(false);
+            })
+            .catch((err)=>{
+                console.log(err);
+                setLoading(false);
+            });
+        }else{
+            toast({
+                title: 'Please Select an Image!',
+                status: 'warning',
+                duration: 5000,
+                isClosable: true,
+            })
+            setLoading(false);
+            return;
+        }
+    };
 
     const handleSearch=async(query)=>{
         setSearch(query);
@@ -144,6 +187,15 @@ const GroupChatModal = ({children}) => {
                 <FormControl>
                     <Input placeholder="Add Users eg: Partha" mb={1} fontFamily={"twitterchirp"}
                     onChange={(e)=> handleSearch(e.target.value)}
+                    />
+                </FormControl>
+                <FormControl>
+                    <Input
+                        type={'file'}
+                        fontFamily={"twitterchirp"}
+                        p={'1'}
+                        accept='image/*'
+                        onChange={(e)=>postDetails(e.target.files[0])}
                     />
                 </FormControl>
 

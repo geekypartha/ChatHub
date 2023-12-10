@@ -91,7 +91,7 @@ const MyChats = ({fetchAgain}) => {
       <Box
         display="flex"
         fontFamily={'twitterchirp'}
-        flexDir="column"
+        flexDirection={'column'}
         p={3}
         bg="#F8F8F8"
         w="100%"
@@ -113,17 +113,37 @@ const MyChats = ({fetchAgain}) => {
                 borderRadius="lg"
                 key={chat._id} 
                 display={'flex'}
+                alignItems={'center'}
               >
                 <Text
                   fontFamily={"twitterchirp"}
                   display={'flex'}
                   alignItems={'center'}
-                  justifyContent={'center'}
+                  justifyContent={'flex-start'}
                 >
                   {!chat.isGroupChat
                     ?(
                     <>
                       <UserDp user={getSenderFull(user, chat.users)} />
+                      {/* {getSender(loggedUser, chat.users)} */}
+                    </>
+                    ):( 
+                    <>
+                      {/* <UserDp user={getSenderFull(user, chat.users)} /> */}
+                      {/* {chat.chatName} */}
+                    </>
+                  )}
+                </Text>
+                <Text
+                  fontFamily={"twitterchirp"}
+                  display={'flex'}
+                  flexDirection={'column'}
+                  //alignItems={'center'}
+                  //justifyContent={'flex-start'}
+                >
+                  {!chat.isGroupChat
+                    ?(
+                    <>
                       {getSender(loggedUser, chat.users)}
                     </>
                     ):( 
@@ -132,9 +152,78 @@ const MyChats = ({fetchAgain}) => {
                       {chat.chatName}
                     </>
                   )}
-                </Text>
+                  {!chat.isGroupChat
+                    ?(
+                      <>
+                        {chat.sender !== loggedUser
+                        ? (
+                          <>
+                          {chat.latestMessage && (
+                          <Text 
+                            fontSize="xs" 
+                            fontFamily={"twitterchirp"}
+                          >
+                            {/* <b>{chat.latestMessage.sender.name} : </b> */}
+                            {chat.latestMessage.content.length > 50
+                              ? chat.latestMessage.content.substring(0, 51) + "..."
+                              : chat.latestMessage.content}
+                          </Text>
+                          )}
+                          </>
+                          ):(
+                          <>
+                            {chat.latestMessage && (
+                            <Text 
+                              fontSize="xs"
+                              fontFamily={"twitterchirp"}
+                            >
+                              {/* <b>{"You"} : </b> */}
+                              {chat.latestMessage.content.length > 50
+                                ? chat.latestMessage.content.substring(0, 51) + "..."
+                                : chat.latestMessage.content}
+                            </Text>
+                          )}
+                          </>
+                        )}
+                      </>
+                    ):(
+                      <>
+                        {chat.sender === loggedUser
+                        ? (
+                          <>
+                          {chat.latestMessage && (
+                          <Text 
+                            fontSize="xs" 
+                            fontFamily={"twitterchirp"}
+                          >
+                            {/* <b> {'You'}: </b> */}
+                            {chat.latestMessage.content.length > 50
+                              ? chat.latestMessage.content.substring(0, 51) + "..."
+                              : chat.latestMessage.content}
+                          </Text>
+                          )}
+                          </>
+                        ):(
+                          <>
+                            {chat.latestMessage && (
+                            <Text 
+                              fontSize="xs"
+                              fontFamily={"twitterchirp"}
+                            >
+                              <b>{chat.latestMessage.sender.name}: </b>
+                              {chat.latestMessage.content.length > 50
+                                ? chat.latestMessage.content.substring(0, 51) + "..."
+                                : chat.latestMessage.content}
+                            </Text>
+                          )}
+                          </>
+                        )}
+                    </>
+                  )}
+                
+                    
 
-                 
+                  </Text>
                  
               </Box>
             ))}
