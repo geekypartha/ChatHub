@@ -21,29 +21,30 @@ const Homepage = () => {
         }
     }, [history]);
 
-  return <Container maxW = 'xl' centerContent>
+  return <Container maxW = {{base:'md', md:'xl'}} centerContent>
     <Box
-      d='flex'
-      justifyContent={'center'}
-      alignItems={'center'}
+      display='flex'
+      flexDirection={'column'}
+      justifyContent={'flex-start'}
+      
       bg={"rgba(0,0,0,0.3)"}
       p={'1vw'}
       w={'90%'}
-      height={'50vh'}
+      height={{base:'90vw', md:'50vh'}}
       m={"40px 0 15px 0"}
       borderRadius={'lg'}
     
     >
-      <Text fontSize={'2em'} fontFamily={"seoge-UI"} color='white' fontWeight={'600'} textAlign={'center'} >ChatHub</Text>
-      <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
-        <Heading size={{ base: 'xs', md: 'sm' }}><Text fontSize={'25px'} color={'white'} fontFamily={"twitterchirp"} fontWeight={"600"} margin={"25px 60px 55px "} textAlign={'left'}>Join today.</Text></Heading>
+      <Text fontSize={{base:'1.5em', md:'2em'}} fontFamily={"seoge-UI"} color='white' fontWeight={'600'} textAlign={'center'} margin={{base:'10px', md:'20px'}}>ChatHub</Text>
+      <Stack spacing={{ base: '1', md: '3' }} textAlign="center">
+        <Heading size={{ base: 'xs', md: 'sm' }}><Text fontSize={{base:'18px', md:'25px'}} color={'white'} fontFamily={"twitterchirp"} fontWeight={"600"} margin={{base:'20px 20px 40px',md:"7px 60px 30px  "}} textAlign={'left'}>Join today.</Text></Heading>
       </Stack>
   
         
-      <VStack spacing={'20px'}>
-        <ChakraLink as={ReactRouterLink} to='/Signup'  ><Button h={'70px'} w={'350px'} fontWeight={'300'} colorScheme='blue' color={'#fff'} fontFamily={'twitterchirp'} borderRadius={'100px'}>Create account</Button></ChakraLink>
-        <Text fontSize={'20px'} color={'white'} fontFamily={"twitterchirp"} fontWeight={"200"} margin={"15px 10px 15px "}  textAlign={'left'}>Already have an account?</Text>
-        <ChakraLink as={ReactRouterLink} to ='/Login'><Button h={'70px'} w={'350px'} fontWeight={'300'} colorScheme='rgba(0,0,0,0.2)' border={'1px solid white'} color={'white'} fontFamily={'twitterchirp'} borderRadius={'100px'}> Log in</Button></ChakraLink>
+      <VStack spacing={{base:'1vw', md:'2vw'}}>
+        <ChakraLink as={ReactRouterLink} to='/Signup'  ><Button h={{base:'15vw', md:'4vw'}} w={{base:'60vw', md:'19vw'}} fontWeight={'300'} colorScheme='blue' color={'#fff'} fontFamily={'twitterchirp'} borderRadius={'100px'}>Create account</Button></ChakraLink>
+        <Text fontSize={{base:'3.5vw', md:'1.1vw'}} color={'white'} fontFamily={"twitterchirp"} fontWeight={"200"} margin={{base:'15px',md:"15px 10px 0"}}  textAlign={'left'}>Already have an account?</Text>
+        <ChakraLink as={ReactRouterLink} to ='/Login'><Button h={{base:'15vw', md:'4vw'}} w={{base:'60vw', md:'19vw'}} fontWeight={'300'} colorScheme='rgba(0,0,0,0.2)' border={'1px solid white'} color={'white'} fontFamily={'twitterchirp'} borderRadius={'100px'}> Log in</Button></ChakraLink>
       </VStack>
     </Box>
     

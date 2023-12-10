@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.c60a30a5.css",
-    "main.js": "/static/js/main.f6dac822.js",
+    "main.js": "/static/js/main.a1a7c340.js",
     "static/media/login page 4.jpg": "/static/media/login page 4.5857e449c47d1086b009.jpg",
     "static/media/SEGOEUI.TTF": "/static/media/SEGOEUI.904177516a6c6c681d51.TTF",
     "static/media/twitterchirp.otf": "/static/media/twitterchirp.350702a3791df2afa07e.otf",
     "static/media/Gilroy-Light.otf": "/static/media/Gilroy-Light.cc7ab55d27205bd64001.otf",
     "index.html": "/index.html",
     "main.c60a30a5.css.map": "/static/css/main.c60a30a5.css.map",
-    "main.f6dac822.js.map": "/static/js/main.f6dac822.js.map"
+    "main.a1a7c340.js.map": "/static/js/main.a1a7c340.js.map"
   },
   "entrypoints": [
     "static/css/main.c60a30a5.css",
-    "static/js/main.f6dac822.js"
+    "static/js/main.a1a7c340.js"
   ]
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ChatState } from '../Context/ChatProvider';
-import { Box,FormControl,IconButton,Input,Spinner,Text, useToast } from '@chakra-ui/react';
+import { Box,Button,FormControl,IconButton,Input,Spinner,Text, useToast } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import UserDp from './UserAvatar/UserDp';
 import { getSender, getSenderFull } from '../config/ChatLogics';
@@ -10,6 +10,8 @@ import axios from 'axios';
 import './styles.css';
 import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client';
+
+import { IoSendSharp } from "react-icons/io5";
 
 const ENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
@@ -28,7 +30,6 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
     const {selectedChat, setSelectedChat, user, notification, setNotification}= ChatState();
 
     const toast = useToast();
-
     
 
     const fetchMessages = async ()=>{
@@ -63,7 +64,7 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
     };
     
     const sendMessage = async (event) =>{
-        if(event.key === "Enter" && newMessage){
+        if((event.key === "Enter" || event.type === "click" ) && newMessage){
             socket.emit("stop typing", selectedChat._id);
             try {
                 const config ={
@@ -93,6 +94,7 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
                 });
             }
         }
+        
     };
 
 
@@ -248,8 +250,9 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
                                 <ScrollableChat messages={messages} />
                             </div>
                         )}
-                        <FormControl fontFamily={'twitterchirp'} onKeyDown={sendMessage} isRequired mt={3}>
-                            {isTyping?<Text fontFamily={'twitterchirp'} fontSize={'15px'}>typing...</Text>:(<></>)}
+                        {isTyping?<Text fontFamily={'twitterchirp'} fontSize={'15px'}>typing...</Text>:(<></>)}
+                        <FormControl display={'flex'} fontFamily={'twitterchirp'} onKeyDown={sendMessage} isRequired mt={3}>
+                            
                             <Input
                             fontFamily={'twitterchirp'}
                                 variant="filled"
@@ -258,6 +261,7 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
                                 onChange={typingHandler}
                                 value={newMessage}
                             />
+                            <Button id='sendButton' colorScheme='transparent'onClick={sendMessage} ><IoSendSharp style={{ fontSize: '1.8em'}} /></Button>
 
                         </FormControl>
                 </Box>
@@ -269,7 +273,7 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
                 </Text>
             </Box>
         )}
-         
+        
     </>
   )
 }
